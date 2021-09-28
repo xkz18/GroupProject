@@ -70,6 +70,13 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
 
     @Override
     public String toString() {

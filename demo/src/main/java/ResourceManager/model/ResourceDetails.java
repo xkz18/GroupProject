@@ -4,11 +4,12 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
-@Table(name = "resoure_details")
-public class Resource_Details {
+@Table(name = "resoureDetails")
+public class ResourceDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer detail_id;
@@ -18,10 +19,10 @@ public class Resource_Details {
     @OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "resourceId")
-    private Resources resources;
+    private Resource resource;
 
     @OneToMany(fetch=FetchType.LAZY,
-            mappedBy="resource_details",
+            mappedBy="resourceDetails",
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
     private List<Project> projects;
@@ -50,12 +51,12 @@ public class Resource_Details {
         this.detail_value = detail_value;
     }
 
-    public Resources getResources() {
-        return resources;
+    public Resource getResources() {
+        return resource;
     }
 
-    public void setResources(Resources resources) {
-        this.resources = resources;
+    public void setResources(Resource resources) {
+        this.resource = resource;
     }
 
     public List<Project> getProjects() {
@@ -72,7 +73,7 @@ public class Resource_Details {
                 "detail_id=" + detail_id +
                 ", time_created=" + time_created +
                 ", detail_value='" + detail_value + '\'' +
-                ", resources=" + resources +
+                ", resources=" + resource +
                 ", projects=" + projects +
                 '}';
     }

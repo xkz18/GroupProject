@@ -7,8 +7,8 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "resoures")
-public class Resources {
+@Table(name = "resoure")
+public class Resource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer resourceId;
@@ -17,12 +17,12 @@ public class Resources {
     @OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "resourceId")
-    private Project_Resources projectResources;
+    private ProjectResources projectResources;
 
     @OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "resourceId")
-    private Resource_Details resourceDetails;
+    private ResourceDetails resourceDetails;
 
 
     public Integer getResourceId() {
@@ -41,19 +41,19 @@ public class Resources {
         this.timeCreated = timeCreated;
     }
 
-    public Project_Resources getProjectResources() {
+    public ProjectResources getProjectResources() {
         return projectResources;
     }
 
-    public void setProjectResources(Project_Resources projectResources) {
+    public void setProjectResources(ProjectResources projectResources) {
         this.projectResources = projectResources;
     }
 
-    public Resource_Details getResourceDetails() {
+    public ResourceDetails getResourceDetails() {
         return resourceDetails;
     }
 
-    public void setResourceDetails(Resource_Details resourceDetails) {
+    public void setResourceDetails(ResourceDetails resourceDetails) {
         this.resourceDetails = resourceDetails;
     }
 

@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.*;
 
 @Data
 @Entity
@@ -22,14 +23,38 @@ public class Project {
     private User user;
 	
 	@OneToMany(fetch=FetchType.LAZY,
-			   mappedBy="Project",
+			   mappedBy="project",
 			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 						 CascadeType.DETACH, CascadeType.REFRESH})
 	private List<ProjectColumns> ProjectColumn;
 	
 	@OneToMany(targetEntity = ProjectResources.class, cascade = CascadeType.ALL)
 	private Set<ProjectResources> ProjectResource;
-	
+
+    @ManyToOne
+    @JoinColumn(name = "resource_details_detail_id")
+    private ResourceDetails resourceDetails;
+
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    private User users;
+
+    public User getUsers() {
+        return users;
+    }
+
+    public void setUsers(User users) {
+        this.users = users;
+    }
+
+    public ResourceDetails getResourceDetails() {
+        return resourceDetails;
+    }
+
+    public void setResourceDetails(ResourceDetails resourceDetails) {
+        this.resourceDetails = resourceDetails;
+    }
+
     public Project() {
 
     }

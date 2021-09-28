@@ -27,6 +27,18 @@ public class ResourceDetails {
                     CascadeType.DETACH, CascadeType.REFRESH})
     private List<Project> projects;
 
+    @ManyToOne
+    @JoinColumn(name = "project_columns_column_id")
+    private ProjectColumns projectColumns;
+
+    public ProjectColumns getProjectColumns() {
+        return projectColumns;
+    }
+
+    public void setProjectColumns(ProjectColumns projectColumns) {
+        this.projectColumns = projectColumns;
+    }
+
     public Integer getDetail_id() {
         return detail_id;
     }

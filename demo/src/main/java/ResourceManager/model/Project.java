@@ -1,9 +1,13 @@
 package ResourceManager.model;
 
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -28,6 +32,7 @@ public class Project {
 	private List<ProjectColumns> ProjectColumn;
 	
 	@OneToMany(targetEntity = ProjectResources.class, cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
 	private Set<ProjectResources> ProjectResource;
 	
     public Project() {

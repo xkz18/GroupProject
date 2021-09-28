@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "resoureDetails")
+@Table(name = "resourceDetails")
 public class ResourceDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,16 +16,16 @@ public class ResourceDetails {
     private Date time_created;
     private String detail_value;
 
-    @OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "resourceId")
+    @JoinColumn(name="resource_id")
     private Resource resource;
 
-    @OneToMany(fetch=FetchType.LAZY,
-            mappedBy="resourceDetails",
-            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.DETACH, CascadeType.REFRESH})
-    private List<Project> projects;
+    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name="column_id")
+    private ProjectColumns projectColumns;
+
 
     public Integer getDetail_id() {
         return detail_id;
@@ -59,13 +59,14 @@ public class ResourceDetails {
         this.resource = resource;
     }
 
-    public List<Project> getProjects() {
-        return projects;
+    public void setProjectColumns(ProjectColumns projectColumn){
+        this.projectColumns = projectColumn;
+    }
+    public ProjectColumns getProjectColumns(){
+        return projectColumns;
     }
 
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
+
 
     @Override
     public String toString() {
@@ -73,8 +74,7 @@ public class ResourceDetails {
                 "detail_id=" + detail_id +
                 ", time_created=" + time_created +
                 ", detail_value='" + detail_value + '\'' +
-                ", resources=" + resource +
-                ", projects=" + projects +
-                '}';
+                ", resources=" + resource
+                + '}';
     }
 }

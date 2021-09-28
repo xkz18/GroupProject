@@ -3,7 +3,6 @@ package ResourceManager.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
 import java.util.List;
 
@@ -16,11 +15,9 @@ public class User {
     @Column(name="id")
     private Integer id;
 
-    @NotEmpty
     @Column(nullable = false, unique = true, name = "username")
     private String username;
 
-    @NotEmpty
     @Column(name="password")
     private String password;
 

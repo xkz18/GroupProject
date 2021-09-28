@@ -1,28 +1,32 @@
 package ResourceManager.model;
 
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "resoure")
+@Table(name = "resource")
 public class Resource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer resourceId;
     private Date timeCreated;
 
-    @OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "resourceId")
-    private ProjectResources projectResources;
+    @OneToMany(targetEntity = ProjectResources.class, cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private Set<ProjectResources> ProjectResource;
 
-    @OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "resourceId")
-    private ResourceDetails resourceDetails;
+    @OneToMany(fetch=FetchType.LAZY,
+            mappedBy="resource",
+            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+                    CascadeType.DETACH, CascadeType.REFRESH})
+    private List<ResourceDetails> resourceDetails;
 
 
     public Integer getResourceId() {
@@ -41,19 +45,19 @@ public class Resource {
         this.timeCreated = timeCreated;
     }
 
-    public ProjectResources getProjectResources() {
-        return projectResources;
+    public Set<ProjectResources> getProjectResources() {
+        return ProjectResource;
     }
 
-    public void setProjectResources(ProjectResources projectResources) {
-        this.projectResources = projectResources;
+    public void setProjectResources(Set<ProjectResources> projectResources) {
+        this.ProjectResource = projectResources;
     }
 
-    public ResourceDetails getResourceDetails() {
+    public List<ResourceDetails> getResourceDetails() {
         return resourceDetails;
     }
 
-    public void setResourceDetails(ResourceDetails resourceDetails) {
+    public void setResourceDetails(List<ResourceDetails> resourceDetails) {
         this.resourceDetails = resourceDetails;
     }
 

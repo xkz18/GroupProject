@@ -3,7 +3,6 @@ package ResourceManager.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
 import java.util.List;
 
@@ -16,11 +15,9 @@ public class User {
     @Column(name="id")
     private Integer id;
 
-    @NotEmpty
     @Column(nullable = false, unique = true, name = "username")
     private String username;
 
-    @NotEmpty
     @Column(name="password")
     private String password;
 
@@ -29,6 +26,16 @@ public class User {
 
     @Column(name = "last_updated")
     private Date lastUpdated;
+	
+	@Column(name = "title")
+	private String title;
+	
+	@Column (name = "role")
+	private String role;
+	
+    @Column(name = "image")
+    private String image;
+
 
     @OneToMany(fetch=FetchType.LAZY,
             mappedBy="users",
@@ -54,6 +61,18 @@ public class User {
     public Date getDateCreated(){
         return dateCreated;
     }
+	public String getTitle(){
+		return title;
+	}
+	public String getRole(){
+		return role;
+	}
+	public String getImage(){
+		return image;
+	}
+	public Date getLastUpdated(){
+		return lastUpdated;
+	}
     public void setUsername(String username) {
         this.username = username;
     }
@@ -64,6 +83,18 @@ public class User {
     public void setPassword(String encodedPassword) {
         this.password = encodedPassword;
     }
+	public void setTitle(String title){
+		this.title = title;
+	}
+	public void setRole(String role){
+		this.role = role;
+	}
+	public void setImage(String image){
+		this.image = image;
+	}
+	public void setLastUpdated(Date lastUpdated){
+		this.lastUpdated = lastUpdated;
+	}
     public int getId() {
         return id;
     }

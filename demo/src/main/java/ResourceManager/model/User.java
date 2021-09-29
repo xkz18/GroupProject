@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -22,10 +23,10 @@ public class User {
     private String password;
 
     @Column(name = "date_created")
-    private Date dateCreated;
+    private LocalDate dateCreated;
 
     @Column(name = "last_updated")
-    private Date lastUpdated;
+    private LocalDate lastUpdated;
 	
 	@Column(name = "title")
 	private String title;
@@ -46,7 +47,7 @@ public class User {
     public User() {
 
     }
-    public User(String username, String password, Date dateCreated) {
+    public User(String username, String password, LocalDate dateCreated) {
         this.username = username;
         this.password = password;
         this.dateCreated = dateCreated;
@@ -58,7 +59,7 @@ public class User {
     public String getPassword() {
         return password;
     }
-    public Date getDateCreated(){
+    public LocalDate getDateCreated(){
         return dateCreated;
     }
 	public String getTitle(){
@@ -70,13 +71,13 @@ public class User {
 	public String getImage(){
 		return image;
 	}
-	public Date getLastUpdated(){
+	public LocalDate getLastUpdated(){
 		return lastUpdated;
 	}
     public void setUsername(String username) {
         this.username = username;
     }
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(LocalDate dateCreated) {
         this.dateCreated = dateCreated;
     }
 
@@ -92,7 +93,7 @@ public class User {
 	public void setImage(String image){
 		this.image = image;
 	}
-	public void setLastUpdated(Date lastUpdated){
+	public void setLastUpdated(LocalDate lastUpdated){
 		this.lastUpdated = lastUpdated;
 	}
     public int getId() {

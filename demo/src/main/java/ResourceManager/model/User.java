@@ -3,7 +3,7 @@ package ResourceManager.model;
 import lombok.Data;
 
 import javax.persistence.*;
-//import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
 import java.util.List;
 

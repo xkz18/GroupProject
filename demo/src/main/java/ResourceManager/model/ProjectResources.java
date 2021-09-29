@@ -1,6 +1,7 @@
 package ResourceManager.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 
@@ -20,7 +21,7 @@ public class ProjectResources {
     @JoinColumn(name="resource_id")
     private Resource resource;
 
-    private Timestamp time_created;
+    private Date time_created;
 
 
     public Integer getRecord_id(){
@@ -41,10 +42,10 @@ public class ProjectResources {
     public Resource getResource(){
         return resource;
     }
-    public void setTime_created(Timestamp timestamp){
-        this.time_created=timestamp;
+    public void setTime_created(Date time_created){
+        this.time_created=time_created;
     }
-    public Timestamp getTime_created(){
+    public Date getTime_created(){
         return time_created;
     }
     @Override

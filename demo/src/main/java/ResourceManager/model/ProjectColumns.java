@@ -54,7 +54,7 @@ public class ProjectColumns {
     @Override
     public String toString(){
         return "ProjectColumn["+
-                ", column_id="+column_id+
+                "column_id="+column_id+
                 ", project="+project+
                 ", column_name="+column_name+
                 ", type="+type+

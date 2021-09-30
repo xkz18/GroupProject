@@ -51,7 +51,7 @@ public class ProjectResources {
     @Override
     public String toString(){
         return "ProjectResource["+ "record_id=" + record_id+
-                ", time_created=" + time_created+
+                "time_created=" + time_created+
                 ", resource=" + resource+
                 ", project=" + project+
                 "]";

@@ -25,15 +25,15 @@ public class Project {
     @JoinColumn(name="user_id")
     private User user;
 	
-	@OneToMany(fetch=FetchType.LAZY,
-			   mappedBy="Project",
+/*	@OneToMany(fetch=FetchType.LAZY,
+			   mappedBy="project",
 			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 						 CascadeType.DETACH, CascadeType.REFRESH})
 	private List<ProjectColumns> ProjectColumn;
 	
 	@OneToMany(targetEntity = ProjectResources.class, cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-	private Set<ProjectResources> ProjectResource;
+	private Set<ProjectResources> ProjectResource;*/
 	
     public Project() {
 

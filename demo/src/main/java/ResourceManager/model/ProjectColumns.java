@@ -1,16 +1,14 @@
 package ResourceManager.model;
 
+import Enums.Type;
+
 import javax.persistence.*;
-import java.security.PublicKey;
 import java.util.List;
 
 
 @Entity
 @Table(name="Project_Columns")
 public class ProjectColumns {
-    public enum Type{
-        Number, Text, Formula
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="dd8d01e2-e447-4ba5-a4c7-62a95c4dc66c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/demo/target/classes/Enums/Type.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/target/classes/Enums/TypeConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/demo/demo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/Enums/Type.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/Enums/TypeConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/Repository/ProjectColumnRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/Repository/ProjectResourceRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/ResourceManager/model/Project.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/ResourceManager/model/ProjectColumns.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/ResourceManager/model/ProjectResources.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/ResourceManager/model/Resource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/ResourceManager/model/ResourceDetails.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/ResourceManager/model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/Service/ProjectColumnService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/Service/ProjectResourceService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/Service/impl/ProjectColumnServiceImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/Service/impl/ProjectResourceServiceImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/test/java/com/example/demo/ResourceManagerApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/test/java/com/example/demo/ResourceManagerApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/ResourceManager/model/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/ResourceManager/model/Project.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/ResourceManager/model/ProjectColumns$Type.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/ResourceManager/model/ProjectColumns.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/ResourceManager/model/ProjectColumns.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/ResourceManager/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/ResourceManager/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/target/test-classes/com/example/demo/ResourceManagerApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/demo/target/test-classes/com/example/demo/ResourceManagerApplicationTests.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1yseCTTfLI7az88odKiGo1agNq8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dd8d01e2-e447-4ba5-a4c7-62a95c4dc66c" name="Changes" comment="" />
+      <created>1633044596621</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1633044596621</updated>
+    </task>
+    <servers />
+  </component>
+</project>

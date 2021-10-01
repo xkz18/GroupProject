@@ -38,11 +38,11 @@ public class User {
     private String image;
 
 
-    /*@OneToMany(fetch=FetchType.LAZY,
+    @OneToMany(fetch=FetchType.LAZY,
             mappedBy="user",
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
-    private List<Project> projects;*/
+    private List<Project> projects;
 
     public User() {
 
@@ -96,10 +96,10 @@ public class User {
     public void setLastUpdated(Date lastUpdated){
         this.lastUpdated = lastUpdated;
     }
-    public int getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     /*public List<Project> getProjects() {

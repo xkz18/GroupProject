@@ -37,7 +37,7 @@ public class Project {
         this.resourceDetails = resourceDetails;
     }
 
-/*	@OneToMany(fetch=FetchType.LAZY,
+	@OneToMany(fetch=FetchType.LAZY,
 			   mappedBy="project",
 			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 						 CascadeType.DETACH, CascadeType.REFRESH})
@@ -45,7 +45,7 @@ public class Project {
 
 	@OneToMany(targetEntity = ProjectResources.class, cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-	private Set<ProjectResources> ProjectResource;*/
+	private Set<ProjectResources> ProjectResource;
 
     public Project() {
 

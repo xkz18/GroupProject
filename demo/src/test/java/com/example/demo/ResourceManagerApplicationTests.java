@@ -63,13 +63,13 @@ class ResourceManagerApplicationTests {
 		projectColumn.setType(Type.Text);
 		projectColumn.setColumn_name("new");
 
-		for(Type c : Type.values()) {
-			System.out.println(c.getCode());
-			System.out.println(c);
-		}
-		System.out.println(Type.Formula);
-		//ProjectColumns result = column_repository.save(projectColumn);
-		//Assert.assertNotNull(result);
+		/*		for(Type c : Type.values()) {
+					System.out.println(c.getCode());
+					System.out.println(c);
+				}
+				System.out.println(Type.Formula);*/
+		ProjectColumns result = column_repository.save(projectColumn);
+		Assert.assertNotNull(result);
 
 		/*ResourceDetails detail=new ResourceDetails();
 		detail.setDetail_id(3);

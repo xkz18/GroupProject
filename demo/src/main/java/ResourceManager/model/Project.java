@@ -60,10 +60,16 @@ public class Project {
     public void setDateCreated(LocalDate dateCreated) {
         this.dateCreated = dateCreated;
     }
+/*    public void setProjectResource(Set<ProjectResources> projectresource){
+        this.ProjectResource = projectresource;
+    }
+    public void setProjectColumns(List<ProjectColumns> projectcolumn){
+        this.ProjectColumn = projectcolumn;
+    }*/
 
     @Override
     public String toString() {
-        return "Project [id=" + projectId +", DateCreated=" + dateCreated + "]";
+        return "Project [id=" + projectId +", DateCreated=" + dateCreated +", User=" + user + "]";
     }
 
 

@@ -1,31 +1,35 @@
-package ResourceManager.model;
+package ResourceManager.entity;
 
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name = "resoureDetails")
+@Table(name = "resource_details")
 public class ResourceDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="detail_id")
     private Integer detail_id;
-    private Date time_created;
+    @Column(name="date_created")
+    private LocalDate time_created;
+
+
+    @Column(name="detail_value")
     private String detail_value;
 
-    @OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "resourceId")
+    @JoinColumn(name="resource_id")
     private Resource resource;
 
-    @OneToMany(fetch=FetchType.LAZY,
-            mappedBy="resourceDetails",
-            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.DETACH, CascadeType.REFRESH})
-    private List<Project> projects;
+    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name="column_id")
+    private ProjectColumns projectColumns;
+
 
     public Integer getDetail_id() {
         return detail_id;
@@ -35,11 +39,11 @@ public class ResourceDetails {
         this.detail_id = detail_id;
     }
 
-    public Date getTime_created() {
+    public LocalDate getTime_created() {
         return time_created;
     }
 
-    public void setTime_created(Date time_created) {
+    public void setTime_created(LocalDate time_created) {
         this.time_created = time_created;
     }
 
@@ -59,13 +63,14 @@ public class ResourceDetails {
         this.resource = resource;
     }
 
-    public List<Project> getProjects() {
-        return projects;
+    public void setProjectColumns(ProjectColumns projectColumn){
+        this.projectColumns = projectColumn;
+    }
+    public ProjectColumns getProjectColumns(){
+        return projectColumns;
     }
 
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
+
 
     @Override
     public String toString() {
@@ -73,8 +78,7 @@ public class ResourceDetails {
                 "detail_id=" + detail_id +
                 ", time_created=" + time_created +
                 ", detail_value='" + detail_value + '\'' +
-                ", resources=" + resource +
-                ", projects=" + projects +
-                '}';
+                ", resources=" + resource
+                + '}';
     }
 }

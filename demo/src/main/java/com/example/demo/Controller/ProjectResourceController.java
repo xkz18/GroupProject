@@ -38,7 +38,7 @@ public class ProjectResourceController {
         return ResponseEntity.ok(list);
         //return new ResponseEntity<>(list, HttpStatus.OK);
     }
-    @GetMapping
+    @GetMapping("/test")
     public String getTest(){
         return "Test";
     }

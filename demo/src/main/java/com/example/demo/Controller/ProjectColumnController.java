@@ -5,6 +5,7 @@ import com.example.demo.ResourceManager.model.ProjectResources;
 import com.example.demo.Service.ProjectColumnService;
 import com.example.demo.Service.ProjectResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,6 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/projectColumn")
 public class ProjectColumnController {
     @Autowired
     ProjectColumnService service;
@@ -34,10 +34,10 @@ public class ProjectColumnController {
     public ResponseEntity<List<ProjectColumns>> getAllResource(){
         List<ProjectColumns> list = service.getAllColumns();
         System.out.println(list.get(0));
-        return ResponseEntity.ok(list);
-        //return new ResponseEntity<>(list, HttpStatus.OK);
+        //return ResponseEntity.ok(list);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
-    @GetMapping
+    @GetMapping("/test")
     public String getTest(){
         return "column_test";
     }

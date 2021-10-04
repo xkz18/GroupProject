@@ -37,6 +37,7 @@ public class ResourceManagerProjectColumnTest {
     @Test
     public void findByIdTest(){
         ProjectColumns result=column_repository.findById(1).orElse(null);
+        System.out.println(result);
         Assert.assertNotNull(result);
     }
 

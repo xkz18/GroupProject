@@ -20,8 +20,17 @@ public class ProjectResourceServiceImp implements ProjectResourceService {
     }
 
     @Override
-    public void deleteProjectResource(Integer record_id){
+    public boolean deleteProjectResource(Integer record_id){
+
+        /*repository.deleteById(record_id);*/
+
+        ProjectResources record=repository.findById(record_id).orElse(null);
+        if (record == null) {
+            System.out.println("record not exist");
+            return false;
+        }
         repository.deleteById(record_id);
+        return true;
     }
 
     @Override

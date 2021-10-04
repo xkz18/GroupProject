@@ -18,7 +18,7 @@ public class ProjectColumns {
     @JoinColumn(name="project_id")
     private Project project;
 
-   /* @OneToMany(mappedBy = "projectColumns", fetch=FetchType.LAZY,
+    /*@OneToMany(mappedBy = "projectColumns", fetch=FetchType.LAZY,
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})*/
     @OneToMany(mappedBy = "projectColumns", fetch = FetchType.EAGER)

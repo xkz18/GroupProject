@@ -28,10 +28,10 @@ class ResourceManagerApplicationTests {
 	private ProjectResourceService service_PR;
 
 	@Autowired
-	private ProjectColumnRepository column_repository;
+		private ProjectColumnRepository column_repository;
 
-	@Autowired
-	private ProjectResourceRepository projectResource_repository;
+		@Autowired
+		private ProjectResourceRepository projectResource_repository;
 
 	@Autowired
 	private ProjectColumnRepository repository2;
@@ -39,14 +39,6 @@ class ResourceManagerApplicationTests {
 	private UserRepository repository;
 	@Test
 	void contextLoads() {
-		User user=new User();
-		Date date=new Date(System.currentTimeMillis());
-		System.out.println(date);
-		//user.setDateCreated(date);
-		//user.setId(1);
-		user.setUsername("test");
-		System.out.println(user);
-		repository.save(user);
 	}
 
 	@Test
@@ -71,18 +63,6 @@ class ResourceManagerApplicationTests {
 		ProjectColumns result = column_repository.save(projectColumn);
 		Assert.assertNotNull(result);
 
-		/*ResourceDetails detail=new ResourceDetails();
-		detail.setDetail_id(3);
-		ResourceDetails detail2=new ResourceDetails();
-		detail2.setDetail_id(4);
-		List<ResourceDetails> list=new ArrayList<>();
-		list.add(detail);
-		list.add(detail2);
-		projectColumn.setResourceDetails(list);
-
-		ProjectColumns result = column_repository.save(projectColumn);
-		Assert.assertNotNull(result);
-		System.out.println(projectColumn);*/
 	}
 
 }

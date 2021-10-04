@@ -15,6 +15,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
+@RequestMapping("/projectColumn")
 public class ProjectColumnController {
     @Autowired
     ProjectColumnService service;

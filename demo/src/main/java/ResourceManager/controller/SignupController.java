@@ -25,7 +25,7 @@ public class SignupController {
 
     @PostMapping(value="/process_signup")
     public String processSignup(User user){
-        if(repository.getUserByUsername(user.getUsername()) != null){
+        if(repository.findByUserName(user.getUsername()) != null){
             return ("signup");
         }
         user.setUsername(user.getUsername());

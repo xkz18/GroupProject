@@ -5,6 +5,7 @@ import ResourceManager.model.User;
 import ResourceManager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -41,10 +42,7 @@ public class UserServiceImpl implements UserService {
         user.setLastUpdated(LocalDate.now());
         return repository.save(user);
     }
-    @Override
-    public Optional<User> findByUserName(String username){
-        User sample= new User();
-        sample.setUsername(username);
-        return repository.findOne(Example.of(sample));
+    public User loadUserByUsername(String s) throws UsernameNotFoundException{
+        return repository.findByUserName(s).get();
     }
 }

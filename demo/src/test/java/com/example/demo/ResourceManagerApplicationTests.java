@@ -28,10 +28,10 @@ class ResourceManagerApplicationTests {
 	private ProjectResourceService service_PR;
 
 	@Autowired
-		private ProjectColumnRepository column_repository;
+	private ProjectColumnRepository column_repository;
 
-		@Autowired
-		private ProjectResourceRepository projectResource_repository;
+	@Autowired
+	private ProjectResourceRepository projectResource_repository;
 
 	@Autowired
 	private ProjectColumnRepository repository2;
@@ -43,26 +43,12 @@ class ResourceManagerApplicationTests {
 
 	@Test
 	public void saveTest(){
-		Project project=new Project();
-		project.setId(1);
-		Date date=new Date(System.currentTimeMillis());
-		//project.setDateCreated(date);
-		//System.out.println(project);
 
-		ProjectColumns projectColumn=new ProjectColumns();
-		projectColumn.setProject(project);
-		projectColumn.setColumn_id(2);
-		projectColumn.setType(Type.Text);
-		projectColumn.setColumn_name("new");
-
-		/*		for(Type c : Type.values()) {
-					System.out.println(c.getCode());
-					System.out.println(c);
-				}
-				System.out.println(Type.Formula);*/
-		ProjectColumns result = column_repository.save(projectColumn);
-		Assert.assertNotNull(result);
-
+		for(Type c : Type.values()) {
+			System.out.println(c.getCode());
+			System.out.println(String.valueOf(c).equals("Text"));
+		}
+		Assert.assertTrue(true);
 	}
 
 }

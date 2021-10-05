@@ -1,10 +1,11 @@
 package com.example.demo.Service.impl;
 
+import com.example.demo.Enums.Type;
 import com.example.demo.Repository.*;
 import com.example.demo.ResourceManager.model.*;
 import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,9 +15,32 @@ public class ProjectColumnServiceImp implements ProjectColumnService {
     @Autowired
     ProjectColumnRepository repository;
 
+    @Autowired
+    ProjectRepository project_repo;
+
+
     @Override
-    public ProjectColumns addColumn(ProjectColumns projectColumn){
-        return repository.save(projectColumn);
+    public ProjectColumns addColumnByProject(Integer project_id, String column_name,String type) {
+        Project project=project_repo.findById(project_id).orElse(null);
+        if(project ==null){
+            System.out.println("Project ID is not valid");
+            return null;
+        }
+        ProjectColumns column=new ProjectColumns();
+        column.setProject(project);
+        column.setColumn_name(column_name);
+
+        if(type=="Number"){
+            column.setType(Type.Number);
+        }
+        if(type=="Text"){
+            column.setType(Type.Text);
+        }
+        if(type=="Formula"){
+            column.setType(Type.Formula);
+        }
+        ProjectColumns result=repository.save(column);
+        return result;
     }
 
     @Override
@@ -31,12 +55,25 @@ public class ProjectColumnServiceImp implements ProjectColumnService {
     }
 
     @Override
-    public ProjectColumns getColumn(Integer column_id){
-        return repository.getById(column_id);
+    public ProjectColumns getColumnById(Integer column_id){
+        /*if(!repository.existsById(column_id)){
+            System.out.println();
+        }*/
+        ProjectColumns projectColumns= repository.findById(column_id).orElse(null);
+        return projectColumns;
     }
 
     @Override
     public List<ProjectColumns> getAllColumns(){
         return repository.findAll();
+    }
+
+    @Override
+    public ProjectColumns save(ProjectColumns projectColumn) {
+        return repository.save(projectColumn);
+    }
+    @Override
+    public List<ProjectColumns> findByProject(Project project){
+        return repository.findByProject(project);
     }
 }

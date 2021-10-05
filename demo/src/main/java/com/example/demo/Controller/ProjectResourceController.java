@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.ResourceManager.model.ProjectColumns;
 import com.example.demo.ResourceManager.model.ProjectResources;
 import com.example.demo.Service.ProjectResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,22 @@ public class ProjectResourceController {
     ProjectResourceService service;
 
     @PostMapping("/create")
-    public ProjectResources addProjectResource(@RequestBody ProjectResources record){
-        record.setTime_created(new Date(System.currentTimeMillis()));
-        return service.addProjectResource(record);
+    public ProjectResources addProjectResource(@RequestBody Integer project_id, Integer resource_id){
+        return service.addProjectResource(project_id,resource_id);
     }
 
     @PostMapping("/delete")
-    public void deleteProjectResource(@RequestParam Integer id){
-        service.deleteProjectResource(id);
+    public String deleteProjectResource(@RequestParam Integer id){
+        return service.deleteProjectResource(id)?"Delete Successfully":"Delete Failed";
+    }
+
+    @PostMapping("/{id}")
+    public ProjectResources findRecordById(@RequestParam(value="id") Integer id){
+        ProjectResources projectResources=service.getProjectResourceById(id);
+        if(projectResources==null){
+            System.out.println("Column ID is not valid");
+        }
+        return projectResources;
     }
 
     @GetMapping("/getAll")
@@ -38,8 +47,9 @@ public class ProjectResourceController {
         return ResponseEntity.ok(list);
         //return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
     @GetMapping("/test")
     public String getTest(){
-        return "Test";
+        return "project_resource_test";
     }
 }

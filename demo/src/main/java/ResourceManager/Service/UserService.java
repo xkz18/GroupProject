@@ -1,6 +1,7 @@
 package ResourceManager.Service;
 
-import ResourceManager.model.User;
+
+import ResourceManager.entity.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;

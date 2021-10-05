@@ -1,7 +1,7 @@
 package ResourceManager.Service.Impl;
 
 import ResourceManager.Service.UserService;
-import ResourceManager.model.User;
+import ResourceManager.entity.User;
 import ResourceManager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;

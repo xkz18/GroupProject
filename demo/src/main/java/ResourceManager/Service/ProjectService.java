@@ -1,7 +1,9 @@
 package ResourceManager.Service;
 
-import ResourceManager.model.Project;
-import ResourceManager.model.User;
+
+
+import ResourceManager.entity.Project;
+import ResourceManager.entity.User;
 
 import java.util.List;
 
@@ -10,9 +12,8 @@ public interface ProjectService {
     public List<Project> findByUser(User user);
 
     List<Project> findAll();
+    public void delete(Integer id);
 
-    public Project save(Project project);
-
-    public Project create(Project project);
+    public Project create(Project project,User user);
     public Project update(Project project);
 }

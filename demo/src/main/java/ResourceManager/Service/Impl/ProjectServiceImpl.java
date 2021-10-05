@@ -1,8 +1,8 @@
 package ResourceManager.Service.Impl;
 
 import ResourceManager.Service.ProjectService;
-import ResourceManager.model.Project;
-import ResourceManager.model.User;
+import ResourceManager.entity.Project;
+import ResourceManager.entity.User;
 import ResourceManager.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -27,14 +27,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     }
 
-    @Override
-    public Project save(Project project){
-        return repository.save(project);
-    }
 
     @Override
-    public Project create(Project project){
+    public Project create(Project project, User user){
         project.setDateCreated(LocalDate.now());
+        project.setUser(user);
         return repository.save(project);
     }
     @Override
@@ -43,8 +40,10 @@ public class ProjectServiceImpl implements ProjectService {
     }
     @Override
     public List<Project> findByUser(User user){
-        Project sample = new Project();
-        sample.setUser(user);
-        return repository.findAll(Example.of(sample));
+        return repository.findByUser(user);
+    }
+    @Override
+    public void delete(Integer id){
+        repository.deleteById(id);
     }
 }

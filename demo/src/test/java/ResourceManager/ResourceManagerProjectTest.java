@@ -1,7 +1,7 @@
 package ResourceManager;
 
-import ResourceManager.model.Project;
-import ResourceManager.model.User;
+import ResourceManager.entity.Project;
+import ResourceManager.entity.User;
 import ResourceManager.repository.ProjectRepository;
 import org.junit.Assert;
 import org.junit.Test;

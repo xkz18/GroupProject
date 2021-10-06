@@ -7,9 +7,8 @@ import ResourceManager.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectColumnServiceImpl implements ProjectColumnService {
@@ -21,8 +20,8 @@ public class ProjectColumnServiceImpl implements ProjectColumnService {
 
 
     @Override
-    public ProjectColumns addColumnByProject(Integer project_id, String column_name,String type) {
-        Project project=project_repo.findById(project_id).orElse(null);
+    public ProjectColumns addColumnByProject(Project project, String column_name,String type, String text) {
+        //Project project=project_repo.findById(project_id).orElse(null);
         if(project ==null){
             System.out.println("Project ID is not valid");
             return null;
@@ -31,13 +30,13 @@ public class ProjectColumnServiceImpl implements ProjectColumnService {
         column.setProject(project);
         column.setColumn_name(column_name);
 
-        if(type=="Number"){
+        if(type.equals("Number")){
             column.setType(Type.Number);
         }
-        if(type=="Text"){
+        if(type.equals("Text")){
             column.setType(Type.Text);
         }
-        if(type=="Formula"){
+        if(type.equals("Formula")){
             column.setType(Type.Formula);
         }
         ProjectColumns result=repository.save(column);
@@ -45,23 +44,26 @@ public class ProjectColumnServiceImpl implements ProjectColumnService {
     }
 
     @Override
-    public Boolean deleteColumn(Integer column_id){
-        ProjectColumns column=repository.findById(column_id).orElse(null);
-        if (column == null) {
-            System.out.println("column not exist");
-            return false;
+    public ProjectColumns deleteColumn(Integer column_id){
+        Optional<ProjectColumns> target=repository.findById(column_id);
+        if (target.isPresent()) {
+            repository.deleteById(column_id);
+            return target.get();
         }
-        repository.deleteById(column_id);
-        return true;
+        else {
+            return null;
+        }
     }
 
     @Override
     public ProjectColumns getColumnById(Integer column_id){
-        /*if(!repository.existsById(column_id)){
-            System.out.println();
-        }*/
-        ProjectColumns projectColumns= repository.findById(column_id).orElse(null);
-        return projectColumns;
+        Optional<ProjectColumns> target= repository.findById(column_id);
+        if(target.isPresent()){
+            return target.get();
+        }
+        else{
+            return null;
+        }
     }
 
     @Override
@@ -71,6 +73,7 @@ public class ProjectColumnServiceImpl implements ProjectColumnService {
 
     @Override
     public ProjectColumns save(ProjectColumns projectColumn) {
+        //projectColumn.getProject()
         return repository.save(projectColumn);
     }
     @Override

@@ -1,6 +1,7 @@
 package ResourceManager.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -25,12 +26,14 @@ public class ResourceDetails {
     @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name="resource_id")
+    @JsonProperty(value = "resource")
     private Resource resource;
 
     @JsonIgnore
     @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name="column_id")
+    @JsonProperty(value = "projectColumns")
     private ProjectColumns projectColumns;
 
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectResourceServiceImpl implements ProjectResourceService {
@@ -23,13 +24,13 @@ public class ProjectResourceServiceImpl implements ProjectResourceService {
     ResourceRepository resource_repo;
 
     @Override
-    public ProjectResources addProjectResource(Integer project_id, Integer resource_id){
-        Project project=project_repo.findById(project_id).orElse(null);
-            if(project ==null){
+    public ProjectResources addProjectResource(Project project, Resource resource){
+        //Project project=project_repo.findById(project_id).orElse(null);
+        if(project ==null){
             System.out.println("Project ID is not valid");
             return null;
         }
-        Resource resource=resource_repo.findById(resource_id).orElse(null);
+        //Resource resource=resource_repo.findById(resource_id).orElse(null);
         if(resource==null){
             System.out.println("Resource ID is not valid");
             return null;
@@ -44,20 +45,26 @@ public class ProjectResourceServiceImpl implements ProjectResourceService {
     }
 
     @Override
-    public boolean deleteProjectResource(Integer record_id){
-        ProjectResources record=repository.findById(record_id).orElse(null);
-        if (record == null) {
-            System.out.println("record not exist");
-            return false;
+    public ProjectResources deleteProjectResource(Integer record_id){
+        Optional<ProjectResources> target=repository.findById(record_id);
+        if (target.isPresent()) {
+            repository.deleteById(record_id);
+            return target.get();
         }
-        repository.deleteById(record_id);
-        return true;
+        else {
+            return null;
+        }
     }
 
     @Override
     public ProjectResources getProjectResourceById(Integer record_id){
-        ProjectResources projectResources= repository.findById(record_id).orElse(null);
-        return projectResources;
+        Optional<ProjectResources> target= repository.findById(record_id);
+        if(target.isPresent()) {
+            return target.get();
+        }
+        else{
+            return null;
+        }
     }
 
     @Override

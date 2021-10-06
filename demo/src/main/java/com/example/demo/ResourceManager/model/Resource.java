@@ -1,5 +1,6 @@
 package com.example.demo.ResourceManager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,11 +18,13 @@ public class Resource {
     @OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "resourceId")
+    @JsonIgnore
     private ProjectResources projectResources;
 
     @OneToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "resourceId")
+    @JsonIgnore
     private ResourceDetails resourceDetails;
 
 

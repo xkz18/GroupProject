@@ -1,5 +1,6 @@
 package com.example.demo.ResourceManager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -23,9 +24,11 @@ public class Project {
     @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name="user_id")
+    @JsonIgnore
     private User user;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "resource_details_detail_id")
     private ResourceDetails resourceDetails;
 
@@ -41,10 +44,12 @@ public class Project {
 			   mappedBy="project",
 			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 						 CascadeType.DETACH, CascadeType.REFRESH})
+    @JsonIgnore
 	private List<ProjectColumns> ProjectColumn;
 
 	@OneToMany(targetEntity = ProjectResources.class, cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
 	private Set<ProjectResources> ProjectResource;
 
     public Project() {

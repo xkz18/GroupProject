@@ -34,11 +34,11 @@ public class ProjectResourceServiceTest {
     public void addTest(){
         Project project=new Project();
         project.setId(1);
-        project_repository.save(project);
+        //project_repository.save(project);
 
         Resource resource=new Resource();
-        resource.setResourceId(1);
-        resource_repository.save(resource);
+        resource.setResourceId(2);
+        //resource_repository.save(resource);
 
         /*Resource resource=resource_repository.getById(1);
         if(resource==null)

@@ -1,5 +1,6 @@
 package com.example.demo.ResourceManager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class ResourceDetails {
     private List<Project> projects;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "project_columns_column_id")
     private ProjectColumns projectColumns;
 

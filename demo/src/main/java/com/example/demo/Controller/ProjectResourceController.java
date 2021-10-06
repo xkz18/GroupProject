@@ -1,7 +1,9 @@
 package com.example.demo.Controller;
 
+import com.example.demo.ResourceManager.model.Project;
 import com.example.demo.ResourceManager.model.ProjectColumns;
 import com.example.demo.ResourceManager.model.ProjectResources;
+import com.example.demo.ResourceManager.model.Resource;
 import com.example.demo.Service.ProjectResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,17 +23,31 @@ public class ProjectResourceController {
     ProjectResourceService service;
 
     @PostMapping("/create")
-    public ProjectResources addProjectResource(@RequestBody Integer project_id, Integer resource_id){
-        return service.addProjectResource(project_id,resource_id);
+    //public ProjectResources addProjectResource(@RequestParam Integer project_id, Integer resource_id){
+    //public ProjectResources addProjectResource(@RequestBody Project project, Resource resource){
+    public ProjectResources addProjectResource(@RequestBody ProjectResources projectResources){
+        return service.save(projectResources);
     }
 
     @PostMapping("/delete")
+    @Transactional
     public String deleteProjectResource(@RequestParam Integer id){
         return service.deleteProjectResource(id)?"Delete Successfully":"Delete Failed";
     }
 
-    @PostMapping("/{id}")
-    public ProjectResources findRecordById(@RequestParam(value="id") Integer id){
+    @PostMapping("/findByProject")
+    @Transactional
+    public List<ProjectResources> findRecordByProject(@RequestBody Project project){
+        return service.findByProject(project);
+    }
+
+    @PostMapping("/findByResource")
+    public List<ProjectResources> findRecordByResource(@RequestBody Resource resource){
+        return service.findByResource(resource);
+    }
+
+    @GetMapping("/{id}")
+    public ProjectResources findRecordById(@PathVariable Integer id){
         ProjectResources projectResources=service.getProjectResourceById(id);
         if(projectResources==null){
             System.out.println("Column ID is not valid");

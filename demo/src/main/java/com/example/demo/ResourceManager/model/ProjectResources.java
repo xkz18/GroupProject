@@ -1,5 +1,9 @@
 package com.example.demo.ResourceManager.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -14,13 +18,18 @@ public class ProjectResources {
     private Integer record_id;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="project_id")
+    @JsonProperty(value = "project")
     private Project project;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="resource_id")
+    @JsonProperty(value = "resource")
     private Resource resource;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "EST")
     private Date time_created;
 
 

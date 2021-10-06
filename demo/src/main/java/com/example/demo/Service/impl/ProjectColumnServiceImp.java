@@ -5,7 +5,6 @@ import com.example.demo.Repository.*;
 import com.example.demo.ResourceManager.model.*;
 import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +19,8 @@ public class ProjectColumnServiceImp implements ProjectColumnService {
 
 
     @Override
-    public ProjectColumns addColumnByProject(Integer project_id, String column_name,String type) {
-        Project project=project_repo.findById(project_id).orElse(null);
+    public ProjectColumns addColumnByProject(Project project, String column_name,String type, String text) {
+        //Project project=project_repo.findById(project_id).orElse(null);
         if(project ==null){
             System.out.println("Project ID is not valid");
             return null;
@@ -30,13 +29,13 @@ public class ProjectColumnServiceImp implements ProjectColumnService {
         column.setProject(project);
         column.setColumn_name(column_name);
 
-        if(type=="Number"){
+        if(type.equals("Number")){
             column.setType(Type.Number);
         }
-        if(type=="Text"){
+        if(type.equals("Text")){
             column.setType(Type.Text);
         }
-        if(type=="Formula"){
+        if(type.equals("Formula")){
             column.setType(Type.Formula);
         }
         ProjectColumns result=repository.save(column);

@@ -5,7 +5,7 @@ import com.example.demo.ResourceManager.model.*;
 import java.util.List;
 
 public interface ProjectResourceService {
-    public ProjectResources addProjectResource(Integer project_id, Integer resource_id);
+    public ProjectResources addProjectResource(Project project, Resource resource);
     public boolean deleteProjectResource(Integer record_id);
     public ProjectResources getProjectResourceById(Integer record_id);
     public List<ProjectResources> getAllProjectResources();

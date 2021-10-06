@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Enums.Type;
+import com.example.demo.ResourceManager.model.Project;
 import com.example.demo.ResourceManager.model.ProjectColumns;
 import com.example.demo.ResourceManager.model.ProjectResources;
 import com.example.demo.Service.ProjectColumnService;
@@ -22,13 +23,23 @@ public class ProjectColumnController {
     ProjectColumnService service;
 
     @PostMapping("/create")
-    public ProjectColumns addProjectResource(@RequestBody Integer project_id, String column_name, String type){
-        return service.addColumnByProject(project_id,column_name, type);
+    //@Transactional
+    //public ProjectColumns addProjectColumn(@RequestBody Project project, String column_name, String type, String text){
+    public ProjectColumns addProjectColumn(@RequestBody ProjectColumns projectColumns){
+        //return service.addColumnByProject(projectColumns.getProject(), "column_name", "type", "text");
+        return service.save(projectColumns);
     }
 
     @PostMapping("/delete")
+    @Transactional
     public String deleteProjectResource(@RequestParam Integer id){
         return service.deleteColumn(id)?"Delete Successfully":"Delete Failed";
+    }
+
+    @PostMapping("/findByProject")
+    @Transactional
+    public List<ProjectColumns> findColumnByProject(@RequestBody Project project){
+        return service.findByProject(project);
     }
 
     @PostMapping("/updateColumnNameById")
@@ -50,13 +61,13 @@ public class ProjectColumnController {
         if(projectColumns==null){
             return "Updated failed: Input Id is not valid";
         }
-        if(type=="Number"){
+        if(type.equals("Number")){
             projectColumns.setType(Type.Number);
         }
-        if(type=="Text"){
+        if(type.equals("Text")){
             projectColumns.setType(Type.Text);
         }
-        if(type=="Formula"){
+        if(type.equals("Formula")){
             projectColumns.setType(Type.Formula);
         }
 

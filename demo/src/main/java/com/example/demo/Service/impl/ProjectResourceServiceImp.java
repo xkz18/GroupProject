@@ -22,13 +22,13 @@ public class ProjectResourceServiceImp implements ProjectResourceService {
     ResourceRepository resource_repo;
 
     @Override
-    public ProjectResources addProjectResource(Integer project_id, Integer resource_id){
-        Project project=project_repo.findById(project_id).orElse(null);
-            if(project ==null){
+    public ProjectResources addProjectResource(Project project, Resource resource){
+        //Project project=project_repo.findById(project_id).orElse(null);
+        if(project ==null){
             System.out.println("Project ID is not valid");
             return null;
         }
-        Resource resource=resource_repo.findById(resource_id).orElse(null);
+        //Resource resource=resource_repo.findById(resource_id).orElse(null);
         if(resource==null){
             System.out.println("Resource ID is not valid");
             return null;

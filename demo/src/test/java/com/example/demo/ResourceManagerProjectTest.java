@@ -25,7 +25,7 @@ public class ResourceManagerProjectTest {
         //user.setId(1);
         user.setUsername("admin");
         user.setPassword("123");
-        project.setId(1);
+        project.setId(2);
         project.setUser(user);
         project.setDateCreated(LocalDate.now());
         Project result = repository.save(project);

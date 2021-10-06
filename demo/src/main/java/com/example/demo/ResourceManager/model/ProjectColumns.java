@@ -1,6 +1,8 @@
 package com.example.demo.ResourceManager.model;
 
 import com.example.demo.Enums.Type;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,6 +17,9 @@ public class ProjectColumns {
     private Integer column_id;
 
     @ManyToOne
+    @JsonIgnore
+    //@JsonProperty("project")
+    @JsonProperty(value = "project")
     @JoinColumn(name="project_id")
     private Project project;
 
@@ -26,7 +31,7 @@ public class ProjectColumns {
 
     private String column_name;
     private Type type;  //Number, Text, Formula
-    //fomula_text
+    private String formula_text;
 
     public Integer getColumn_id(){return column_id;}
 
@@ -36,11 +41,11 @@ public class ProjectColumns {
 
     public void setProject(Project project){this.project=project;}
 
-    public List<ResourceDetails> getResourceDetails(){return resourceDetails;}
+    /*public List<ResourceDetails> getResourceDetails(){return resourceDetails;}
 
     public void setResourceDetails(List<ResourceDetails> resourceDetails){
         this.resourceDetails=resourceDetails;
-    }
+    }*/
 
     public void setColumn_name(String column_name){this.column_name=column_name;}
 
@@ -50,6 +55,9 @@ public class ProjectColumns {
 
     public Type getType(){return type;}
 
+    public void setFormula_text(String formula_text){this.formula_text=formula_text;}
+
+    public String getFormula_text(){return formula_text;}
     //set&getFormula_text()
 
     @Override
@@ -59,7 +67,6 @@ public class ProjectColumns {
                 ", project="+project+
                 ", column_name="+column_name+
                 ", type="+type+
-                ", resourceDetails="+resourceDetails+
                 "]";
     }
 

@@ -29,11 +29,11 @@ public class ResourceManagerProjectResourceTest {
     @Test
     public void saveTest(){
         Resource resource=new Resource();
-        resource.setResourceId(1);
-        resource_repository.save(resource);
+        resource.setResourceId(2);
+        //resource_repository.save(resource);
         Project project =new Project();
         project.setId(1);
-        project_repository.save(project);
+        //project_repository.save(project);
         ProjectResources data=new ProjectResources();
         data.setProject(project);
         data.setResource(resource);

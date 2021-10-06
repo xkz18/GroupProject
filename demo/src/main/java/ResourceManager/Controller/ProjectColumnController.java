@@ -1,14 +1,16 @@
 package ResourceManager.Controller;
 
+import ResourceManager.enums.Type;
+import ResourceManager.entity.Project;
 import ResourceManager.entity.ProjectColumns;
 import ResourceManager.entity.ProjectResources;
 import ResourceManager.Service.ProjectColumnService;
 import ResourceManager.Service.ProjectResourceService;
-import ResourceManager.enums.Type;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.HttpStatus;
+
 import javax.transaction.Transactional;
 import java.sql.Date;
 import java.util.List;
@@ -21,13 +23,23 @@ public class ProjectColumnController {
     ProjectColumnService service;
 
     @PostMapping("/create")
-    public ProjectColumns addProjectResource(@RequestParam Integer project_id, String column_name, String type){
-        return service.addColumnByProject(project_id,column_name, type);
+    //@Transactional
+    //public ProjectColumns addProjectColumn(@RequestBody Project project, String column_name, String type, String text){
+    public ProjectColumns addProjectColumn(@RequestBody ProjectColumns projectColumns){
+        //return service.addColumnByProject(projectColumns.getProject(), "column_name", "type", "text");
+        return service.save(projectColumns);
     }
 
     @PostMapping("/delete")
+    @Transactional
     public String deleteProjectResource(@RequestParam Integer id){
         return service.deleteColumn(id)?"Delete Successfully":"Delete Failed";
+    }
+
+    @PostMapping("/findByProject")
+    @Transactional
+    public List<ProjectColumns> findColumnByProject(@RequestBody Project project){
+        return service.findByProject(project);
     }
 
     @PostMapping("/updateColumnNameById")
@@ -49,13 +61,13 @@ public class ProjectColumnController {
         if(projectColumns==null){
             return "Updated failed: Input Id is not valid";
         }
-        if(type=="Number"){
+        if(type.equals("Number")){
             projectColumns.setType(Type.Number);
         }
-        if(type=="Text"){
+        if(type.equals("Text")){
             projectColumns.setType(Type.Text);
         }
-        if(type=="Formula"){
+        if(type.equals("Formula")){
             projectColumns.setType(Type.Formula);
         }
 

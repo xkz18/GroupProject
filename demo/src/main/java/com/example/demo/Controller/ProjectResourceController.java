@@ -6,6 +6,7 @@ import com.example.demo.ResourceManager.model.ProjectResources;
 import com.example.demo.ResourceManager.model.Resource;
 import com.example.demo.Service.ProjectResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,41 +26,58 @@ public class ProjectResourceController {
     @PostMapping("/create")
     //public ProjectResources addProjectResource(@RequestParam Integer project_id, Integer resource_id){
     //public ProjectResources addProjectResource(@RequestBody Project project, Resource resource){
-    public ProjectResources addProjectResource(@RequestBody ProjectResources projectResources){
-        return service.save(projectResources);
+
+    public ResponseEntity<?> addProjectResource(@RequestBody ProjectResources projectResources){
+        ProjectResources result= service.save(projectResources);
+        if(result==null){
+            return new ResponseEntity<>("{error: Created failed!}", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping("/delete")
     @Transactional
-    public String deleteProjectResource(@RequestParam Integer id){
-        return service.deleteProjectResource(id)?"Delete Successfully":"Delete Failed";
+    public ResponseEntity<?> deleteProjectResource(@RequestParam Integer id){
+        ProjectResources result=service.deleteProjectResource(id);
+        if(result==null){
+            return new ResponseEntity<>("{error: Delete failed, record is not found!}", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("Delete Successfully: Record: "+result, HttpStatus.OK);
     }
 
     @PostMapping("/findByProject")
     @Transactional
-    public List<ProjectResources> findRecordByProject(@RequestBody Project project){
-        return service.findByProject(project);
+    public ResponseEntity<?> findRecordByProject(@RequestBody Project project){
+        List<ProjectResources> resultList= service.findByProject(project);
+        if(resultList==null||resultList.size()==0){
+            return new ResponseEntity<>("{error: No related records found!}", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(resultList, HttpStatus.OK);
     }
 
     @PostMapping("/findByResource")
-    public List<ProjectResources> findRecordByResource(@RequestBody Resource resource){
-        return service.findByResource(resource);
+    public ResponseEntity<?> findRecordByResource(@RequestBody Resource resource){
+        List<ProjectResources> resultList= service.findByResource(resource);
+        if(resultList==null||resultList.size()==0){
+            return new ResponseEntity<>("{error: No related records found!}", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(resultList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ProjectResources findRecordById(@PathVariable Integer id){
+    public ResponseEntity<?> findRecordById(@PathVariable Integer id){
         ProjectResources projectResources=service.getProjectResourceById(id);
         if(projectResources==null){
-            System.out.println("Column ID is not valid");
+            return new ResponseEntity<>("{error: Column ID is not valid!}", HttpStatus.BAD_REQUEST);
         }
-        return projectResources;
+        return new ResponseEntity<>(projectResources, HttpStatus.OK);
     }
 
     @GetMapping("/getAll")
     @Transactional
     public ResponseEntity<List<ProjectResources>> getAllResource(){
         List<ProjectResources> list = service.getAllProjectResources();
-        System.out.println(list.get(0));
+        //System.out.println(list.get(0));
         return ResponseEntity.ok(list);
         //return new ResponseEntity<>(list, HttpStatus.OK);
     }

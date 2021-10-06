@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProjectResourceService {
     public ProjectResources addProjectResource(Project project, Resource resource);
-    public boolean deleteProjectResource(Integer record_id);
+    public ProjectResources deleteProjectResource(Integer record_id);
     public ProjectResources getProjectResourceById(Integer record_id);
     public List<ProjectResources> getAllProjectResources();
     public ProjectResources save(ProjectResources projectResource);

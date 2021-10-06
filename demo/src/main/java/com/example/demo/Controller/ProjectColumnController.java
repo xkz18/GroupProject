@@ -6,6 +6,7 @@ import com.example.demo.ResourceManager.model.ProjectColumns;
 import com.example.demo.ResourceManager.model.ProjectResources;
 import com.example.demo.Service.ProjectColumnService;
 import com.example.demo.Service.ProjectResourceService;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,64 +24,80 @@ public class ProjectColumnController {
     ProjectColumnService service;
 
     @PostMapping("/create")
-    //@Transactional
     //public ProjectColumns addProjectColumn(@RequestBody Project project, String column_name, String type, String text){
-    public ProjectColumns addProjectColumn(@RequestBody ProjectColumns projectColumns){
-        //return service.addColumnByProject(projectColumns.getProject(), "column_name", "type", "text");
-        return service.save(projectColumns);
+    public ResponseEntity<?> addProjectColumn(@RequestBody ProjectColumns projectColumns){
+        ProjectColumns result= service.save(projectColumns);
+        if(result==null){
+            return new ResponseEntity<>("{error: Created failed!}", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping("/delete")
-    @Transactional
-    public String deleteProjectResource(@RequestParam Integer id){
-        return service.deleteColumn(id)?"Delete Successfully":"Delete Failed";
+    public ResponseEntity<?> deleteProjectColumn(@RequestParam Integer id){
+        ProjectColumns result= service.deleteColumn(id);
+        if(result==null){
+            return new ResponseEntity<>("{error: Delete failed, projectColumn is not found!}", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("Delete Successfully: Column: "+result, HttpStatus.OK);
     }
 
     @PostMapping("/findByProject")
-    @Transactional
-    public List<ProjectColumns> findColumnByProject(@RequestBody Project project){
-        return service.findByProject(project);
+    public ResponseEntity<?> findColumnByProject(@RequestBody Project project){
+        List<ProjectColumns> resultList= service.findByProject(project);
+        if(resultList==null||resultList.size()==0){
+            return new ResponseEntity<>("{error: No related columns found!}", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(resultList, HttpStatus.OK);
     }
 
     @PostMapping("/updateColumnNameById")
-    @Transactional
-    public String updateColumnNameById(@RequestParam(value = "id") Integer id, @RequestParam(value = "name") String column_name){
-        ProjectColumns projectColumns=service.getColumnById(id);
-        if(projectColumns==null){
-            return "Updated failed: Input Id is not valid";
+    public ResponseEntity<?> updateColumnNameById(@RequestParam(value = "id") Integer id, @RequestParam(value = "name") String column_name){
+        if(column_name==null||column_name.equals("")){
+            return new ResponseEntity<>("{error: Updated failed: Input name is not valid!}", HttpStatus.BAD_REQUEST);
         }
+
+        ProjectColumns projectColumns=service.getColumnById(id);
+
+        if(projectColumns==null){
+            return new ResponseEntity<>("{error: Updated failed: Input Id is not valid!}", HttpStatus.BAD_REQUEST);
+        }
+
         projectColumns.setColumn_name(column_name);
         service.save(projectColumns);
-        return "Update Successfully";
+        return new ResponseEntity<>(projectColumns, HttpStatus.OK);
     }
 
     @PostMapping("/updateColumnTypeById")
-    @Transactional
-    public String updateColumnTypeById(@RequestParam(value = "id") Integer id, @RequestParam(value = "type") String type){
+    public ResponseEntity<?> updateColumnTypeById(@RequestParam(value = "id") Integer id, @RequestParam(value = "type") String type){
         ProjectColumns projectColumns=service.getColumnById(id);
         if(projectColumns==null){
-            return "Updated failed: Input Id is not valid";
+            return new ResponseEntity<>("{error: Updated failed: Input Id is not valid!}", HttpStatus.BAD_REQUEST);
         }
+        Boolean matched=false;
         if(type.equals("Number")){
             projectColumns.setType(Type.Number);
+            matched=true;
         }
         if(type.equals("Text")){
             projectColumns.setType(Type.Text);
+            matched=true;
         }
         if(type.equals("Formula")){
             projectColumns.setType(Type.Formula);
+            matched=true;
         }
-
+        if(!matched){
+            return new ResponseEntity<>("{error: Input type is not valid!}", HttpStatus.BAD_REQUEST);
+        }
         service.save(projectColumns);
-        return "Update Successfully";
+        return new ResponseEntity<>(projectColumns, HttpStatus.OK);
+
     }
 
     @GetMapping("/getAll")
-    @Transactional
     public ResponseEntity<List<ProjectColumns>> getAllResource(){
         List<ProjectColumns> list = service.getAllColumns();
-        System.out.println(list.get(0));
-        //return ResponseEntity.ok(list);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
@@ -89,22 +106,13 @@ public class ProjectColumnController {
         return "column_test";
     }
 
-    /*@PostMapping("/find")
-    @Transactional
-    public ProjectColumns findColumnById(@RequestParam(value="id") Integer id){
-        ProjectColumns projectColumns=service.getColumnById(id);
-        if(projectColumns==null){
-            System.out.println("Column ID is not valid");
-        }
-        return projectColumns;
-    }*/
 
     @GetMapping("/{id}")
-    public ProjectColumns findColumnById(@PathVariable Integer id){
+    public ResponseEntity<?> findColumnById(@PathVariable Integer id){
         ProjectColumns projectColumns=service.getColumnById(id);
         if(projectColumns==null){
-            System.out.println("Column ID is not valid");
+            return new ResponseEntity<>("{error: Column not exists!}", HttpStatus.BAD_REQUEST);
         }
-        return projectColumns;
+        return new ResponseEntity<>(projectColumns, HttpStatus.OK);
     }
 }

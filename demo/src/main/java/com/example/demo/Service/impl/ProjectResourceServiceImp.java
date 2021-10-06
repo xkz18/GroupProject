@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectResourceServiceImp implements ProjectResourceService {
@@ -43,20 +44,26 @@ public class ProjectResourceServiceImp implements ProjectResourceService {
     }
 
     @Override
-    public boolean deleteProjectResource(Integer record_id){
-        ProjectResources record=repository.findById(record_id).orElse(null);
-        if (record == null) {
-            System.out.println("record not exist");
-            return false;
+    public ProjectResources deleteProjectResource(Integer record_id){
+        Optional<ProjectResources> target=repository.findById(record_id);
+        if (target.isPresent()) {
+            repository.deleteById(record_id);
+            return target.get();
         }
-        repository.deleteById(record_id);
-        return true;
+        else {
+            return null;
+        }
     }
 
     @Override
     public ProjectResources getProjectResourceById(Integer record_id){
-        ProjectResources projectResources= repository.findById(record_id).orElse(null);
-        return projectResources;
+        Optional<ProjectResources> target= repository.findById(record_id);
+        if(target.isPresent()) {
+            return target.get();
+        }
+        else{
+            return null;
+        }
     }
 
     @Override

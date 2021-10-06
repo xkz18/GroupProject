@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectColumnServiceImp implements ProjectColumnService {
@@ -43,23 +44,26 @@ public class ProjectColumnServiceImp implements ProjectColumnService {
     }
 
     @Override
-    public Boolean deleteColumn(Integer column_id){
-        ProjectColumns column=repository.findById(column_id).orElse(null);
-        if (column == null) {
-            System.out.println("column not exist");
-            return false;
+    public ProjectColumns deleteColumn(Integer column_id){
+        Optional<ProjectColumns> target=repository.findById(column_id);
+        if (target.isPresent()) {
+            repository.deleteById(column_id);
+            return target.get();
         }
-        repository.deleteById(column_id);
-        return true;
+        else {
+            return null;
+        }
     }
 
     @Override
     public ProjectColumns getColumnById(Integer column_id){
-        /*if(!repository.existsById(column_id)){
-            System.out.println();
-        }*/
-        ProjectColumns projectColumns= repository.findById(column_id).orElse(null);
-        return projectColumns;
+        Optional<ProjectColumns> target= repository.findById(column_id);
+        if(target.isPresent()){
+            return target.get();
+        }
+        else{
+            return null;
+        }
     }
 
     @Override
@@ -69,6 +73,7 @@ public class ProjectColumnServiceImp implements ProjectColumnService {
 
     @Override
     public ProjectColumns save(ProjectColumns projectColumn) {
+        //projectColumn.getProject()
         return repository.save(projectColumn);
     }
     @Override

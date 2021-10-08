@@ -67,7 +67,7 @@ public class ProjectResourceController {
     public ResponseEntity<?> findRecordById(@PathVariable Integer id){
         ProjectResources projectResources=service.getProjectResourceById(id);
         if(projectResources==null){
-            return new ResponseEntity<>("{error: Column ID is not valid!}", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("{error: Record ID is not valid!}", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(projectResources, HttpStatus.OK);
     }

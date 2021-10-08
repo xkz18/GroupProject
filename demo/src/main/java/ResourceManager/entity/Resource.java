@@ -26,7 +26,7 @@ public class Resource {
             mappedBy="resource",
             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
-    private List<ProjectResources> ProjectResource;
+    private List<ProjectResources> projectResource;
 
     @JsonIgnore
     @OneToMany(fetch=FetchType.LAZY,
@@ -60,11 +60,11 @@ public class Resource {
 
 
     public List<ProjectResources> getProjectResource() {
-        return ProjectResource;
+        return projectResource;
     }
 
     public void setProjectResource(List<ProjectResources> projectResource) {
-        ProjectResource = projectResource;
+        this.projectResource = projectResource;
     }
 
     @Override

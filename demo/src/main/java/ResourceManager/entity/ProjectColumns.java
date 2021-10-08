@@ -2,6 +2,7 @@ package ResourceManager.entity;
 
 import ResourceManager.enums.Type;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,11 +21,8 @@ public class ProjectColumns {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name="project_id")
+    @JsonProperty(value = "project")
     private Project project;
-
-    /*@OneToMany(mappedBy = "projectColumns", fetch=FetchType.LAZY,
-            cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.DETACH, CascadeType.REFRESH})*/
 
     @JsonIgnore
     @OneToMany(mappedBy = "projectColumns", fetch = FetchType.EAGER)
@@ -32,7 +30,7 @@ public class ProjectColumns {
 
     private String column_name;
     private Type type;  //Number, Text, Formula
-    //fomula_text
+    private String formula_text;
 
     public Integer getColumn_id(){return column_id;}
 
@@ -42,12 +40,6 @@ public class ProjectColumns {
 
     public void setProject(Project project){this.project=project;}
 
-    public List<ResourceDetails> getResourceDetails(){return resourceDetails;}
-
-    public void setResourceDetails(List<ResourceDetails> resourceDetails){
-        this.resourceDetails=resourceDetails;
-    }
-
     public void setColumn_name(String column_name){this.column_name=column_name;}
 
     public String getColumn_name(){return column_name;}
@@ -56,17 +48,19 @@ public class ProjectColumns {
 
     public Type getType(){return type;}
 
-    //set&getFormula_text()
+    public void setFormula_text(String formula_text){this.formula_text=formula_text;}
+
+    public String getFormula_text(){return formula_text;}
 
     @Override
     public String toString(){
-        return "ProjectColumn["+
+        return "ProjectColumn ["+
                 "column_id="+column_id+
                 ", project="+project+
                 ", column_name="+column_name+
                 ", type="+type+
-                ", resourceDetails="+resourceDetails+
-                "]";
+                ", formula_text="+formula_text+
+                "] ";
     }
 
 }
